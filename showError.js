@@ -1,12 +1,5 @@
 var Dropbox = require('dropbox');
 
-var client = new Dropbox.Client({
-    key: "2n2769ovel9u7lw",
-    secret: "ciwy8fasj7f2e23"
-});
-
-client.authDriver(new Dropbox.AuthDriver.NodeServer(8191));
-
 var showError = function(error) {
   switch (error.status) {
   case Dropbox.ApiError.INVALID_TOKEN:
@@ -45,35 +38,4 @@ var showError = function(error) {
   }
 };
 
-client.authenticate(function(error, client) {
-  if (error) {
-    // Replace with a call to your own error-handling code.
-    //
-    // Don't forget to return from the callback, so you don't execute the code
-    // that assumes everything went well.
-    return showError(error);
-  }
-
-  // Replace with a call to your own application code.
-  //
-  // The user authorized your app, and everything went well.
-  // client is a Dropbox.Client instance that you can use to make API calls.
-  console.log(client);
-});
-
-client.onError.addListener(function(error) {
-  // if (window.console) {  // Skip the "if" in node.js code.
-    console.error(error);
-  // }
-});
-
-client.getAccountInfo(function(error, accountInfo) {
-  if (error) {
-    return showError(error);  // Something went wrong.
-  }
-
-  alert("Hello, " + accountInfo.name + "!");
-});
-
 module.exports = showError;
-module.exports = client;

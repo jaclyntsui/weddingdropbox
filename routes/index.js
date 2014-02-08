@@ -3,26 +3,40 @@
  * GET home page.
  */
 
-var client = require('../client');
 var fs = require('fs');
+var path = require('path');
+var client = require('../client');
+var showError = require('../client');
 
 exports.index = function(req, res){
   res.render('index');
 };
 
 exports.upload = function(req, res){
-	var photo = req.body.files;
+	// console.log(req);
+	console.log(req.files);
+	var file = req.files.file;
+	var filePath = file.path;
+	var targetPath = path.resolve('./uploads/', file.name);
 
-	fs.readFile(photo, function(error, data) {
+	// var file = files.file;
+	fs.rename(filePath, targetPath, function(err) {
+            if (err) throw err;
+            console.log("Upload completed!");
+        });
+
+	fs.readFile(targetPath, function(error, data) {
 		if (error) {
-			return handleError;
+			return showError;
 		}
-		client.writeFile(photo, data, function(error, stat) {
+
+		client.writeFile(targetPath, data, function(error, stat) {
 			if (error) {
-				return handleError(error);
+				return showError(error);
 			}
 		});
-	});
+
+});
 
   res.redirect('/');
 };
