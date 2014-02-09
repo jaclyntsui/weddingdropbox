@@ -6,8 +6,8 @@ module.exports = function(swig) {
 //     } else {
 //       link_name = "Page "+doc.url_name;
 //     }
-			return "<img src='/"+ fileNames +"' style='width: 100px; height: 100px;'>";
-//     "<a href='/gallery/"+doc.url_name+"'>"+link_name+"</a>";
+			return "<img src='/"+ fileNames +"' style='width: 300px; height: 200px; padding: 8px; border: solid 1px #B5D6CD; box-shadow: 1px 1px 5px #999'>";
+
   }
   show_pic.safe = true;
   swig.setFilter('show_pic', show_pic);
