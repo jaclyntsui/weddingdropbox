@@ -76,4 +76,4 @@ client.getAccountInfo(function(error, accountInfo) {
   alert("Hello, " + accountInfo.name + "!");
 });
 
-module.exports = client;
+module.exports = client, showError;

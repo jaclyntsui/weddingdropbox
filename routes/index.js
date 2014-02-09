@@ -2,7 +2,7 @@
 /*
  * GET home page.
  */
-
+var showError = require('../client');
 var client = require('../client');
 var fs = require('fs');
 
@@ -15,11 +15,11 @@ exports.upload = function(req, res){
 
 	fs.readFile(photo, function(error, data) {
 		if (error) {
-			return handleError;
+			return showError;
 		}
 		client.writeFile(photo, data, function(error, stat) {
 			if (error) {
-				return handleError(error);
+				return showError(error);
 			}
 		});
 	});
